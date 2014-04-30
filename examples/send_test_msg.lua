@@ -9,7 +9,7 @@ else
 end
 
 if not arg[1] then
-	print("Error: must include recipient address")
+	print("Usage: lua5.1 send_test_msg.lua RECIPIENT_EMAIL")
 	return
 end
 
