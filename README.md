@@ -7,15 +7,15 @@ requirements
 ------------
 lua 5.1  
 lua-cURL (not to be confused with luacurl)  
-dkjson (included)  
+dkjson (included)
 
 api
 ---
-**zulip.Client:new(email, key)**
-instantiate a new zulip client.
-arguments:
-  email -- bot email address
-  key -- bot api key
+**zulip.Client:new(email, key)**  
+instantiate a new zulip client.  
+arguments:  
+  email -- bot email address  
+  key -- bot api key  
 
 examples
 --------
