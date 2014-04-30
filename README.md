@@ -5,9 +5,9 @@ Zulua is a Lua binding of the Zulip API. in addition to extending the basic func
 
 requirements
 ------------
-lua 5.1
-lua-cURL (not to be confused with luacurl)
-dkjson (included)
+lua 5.1  
+lua-cURL (not to be confused with luacurl)  
+dkjson (included)  
 
 api
 ---
