@@ -1,4 +1,18 @@
---Lua 5.1
+--[[
+Copyright (c) Decky Coss 2014-2015 (coss@cosstropolis.com)
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
+]]
 
 require("cURL")
 json = require("dkjson")
@@ -8,11 +22,7 @@ zulip.Client = {}
 
 function zulip.Client:new(email, key)
 	-- args cannot be null
-	assert(email, "cfg file, or email and key, are required")
-
-	if not key then
-		cfg = io.open(email)
-	end
+	assert(email, "email and key are required")
 
 	-- metatable
 	o = {}
@@ -22,6 +32,7 @@ function zulip.Client:new(email, key)
 	self.key = key
 	self.__index = self
 	self:reset_curl()
+
 	return o
 end
 
@@ -33,7 +44,7 @@ function zulip.Client:reset_curl()
 	self.curl = cURL.easy_init()
 	self:set_userpwd()
 	self.mcurl = cURL.multi_init()
-	self.mcurl:add_handle(self.curl)
+	-- self.mcurl:add_handle(self.curl)
 end
 
 function zulip.Client:perform_transfer()
@@ -41,9 +52,13 @@ function zulip.Client:perform_transfer()
 		perform curl transfer and return server response
 	]]
 
-	for d, t in self.mcurl:perform() do
-		if t == "data" then return d end
-	end
+	local d = ""
+	self.curl:perform({writefunction=function(str) d=str end, readfunction=function() end})
+	return d
+	-- for d, t in self.mcurl:perform() do
+	-- 	print(d, t)
+	-- 	if t == "data" then return d end
+	-- end
 end
 
 function zulip.Client:send_message(msg)
@@ -75,7 +90,8 @@ function zulip.Client:send_message(msg)
 	-- end
 
 	--try
-	b, rdata = pcall(json.decode, self:perform_transfer())
+	d = self:perform_transfer()
+	b, rdata = pcall(json.decode, d)
 	if b then
 		return rdata
 	--except

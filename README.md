@@ -39,7 +39,7 @@ msg.subject (string, number, boolean) -- only used if msg.type is "stream"
 send a private message.  
 equivalent to `send_message({to=to, content=content, type="private"{)`
 
-**zulip.Client:send_private_message(to, content, subject)**  
+**zulip.Client:send_stream_message(to, content, subject)**  
 send a stream message.  
 equivalent to `send_message({to=to, content=content, subject=subject type="stream"{)`
 
@@ -69,7 +69,7 @@ dont_block -- immediately receive either events or heartbeat
 
 examples
 --------
-usage for the included sample programs (make sure to run them from within examples/ !):
+usage for the included sample programs:
 
-`lua5.1 send_test_msg.lua RECIPIENT_ADDRESS`
-`lua5.1 print_each_msg.lua`
+`lua5.1 examples/send_test_msg.lua RECIPIENT_ADDRESS`
+`lua5.1 examples/print_each_msg.lua`
