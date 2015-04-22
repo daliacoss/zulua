@@ -27,7 +27,7 @@ arguments:
 email (string) -- bot email address  
 key (string) -- bot api key
 
-**zulip.Client:send_message(msg)**
+**zulip.Client:send_message(msg)**  
 send a private or stream message.  
 arguments:  
 msg.to (string) -- name of stream  
@@ -59,8 +59,8 @@ arguments:
 event_types (table) -- zero or more of "message", "pointer", "subscriptions", "realm"  
 apply_markdown (boolean)
 
-  **zulip.Client:get_events_from_queue(reregister_if_dead, queue_id, last_event_id, dont_block)**  
-get latest events from queue as response table.
+**zulip.Client:get_events_from_queue(reregister_if_dead, queue_id, last_event_id, dont_block)**  
+get latest events from queue as response table.  
 arguments:  
 reregister_if_dead (boolean) -- call register_queue if queue_id does not exist  
 queue_id (numeber) -- default to self.queue_id  
@@ -71,5 +71,6 @@ examples
 --------
 usage for the included sample programs:
 
-`lua5.1 examples/send_test_msg.lua RECIPIENT_ADDRESS`
+`lua5.1 examples/send_test_msg.lua RECIPIENT_ADDRESS`  
 `lua5.1 examples/print_each_msg.lua`
+
