@@ -98,7 +98,6 @@ function zulip.Client:send_message(msg)
 	else
 		return {result="error", msg="no data in server response"}
 	end
-	--return json.decode(self:perform_transfer())
 end
 
 function zulip.Client:send_private_message(to, content)

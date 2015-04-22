@@ -19,7 +19,6 @@ key (string) -- bot api key
 queue_id (number) -- current event queue id  
 last_event_id (number) -- last event id  
 curl -- easy cURL instance
-mcurl -- multi cURL instance
 
 **zulip.Client:new(email, key)**  
 instantiate a new zulip client.  
